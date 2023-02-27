@@ -1,4 +1,4 @@
-import Card from './Card';
+import Card from '../Card/Card.jsx';
 
 export default function Cards(props) {
    const { characters } = props;
@@ -14,6 +14,7 @@ export default function Cards(props) {
                species={character.species}
                gender={character.gender}
                image={character.image}
+               onClose={(() => characters.onClose(character.id))}
             />
          ))}
       </div>

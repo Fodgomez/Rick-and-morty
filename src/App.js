@@ -16,8 +16,9 @@ function App () {
     // imagen: "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
     //  };
 
-  function onSearch(character){
-    fetch('https://rickandmortyapi.com/api/character/${character}')
+    function onSearch(id){
+   
+    fetch(`https://rickandmortyapi.com/api/character/${id}`)
     .then((response) => response.json())
     .then((data) =>{
       if(data.name){
@@ -31,10 +32,13 @@ function App () {
   setCharacters(characters.filter((char) => char.id !== id));
 };
 
+
 return (
-  <div className="App" style={{ padding: "25px" }}>
+  <div 
+  className="App" style={{ padding: "25px" }}>
+  
   <NavBar onSearch={onSearch} />
-      <hr />
+      <br />
       <Routes>
         <Route path="/about" element={<About />} />
         <Route
@@ -44,6 +48,7 @@ return (
         <Route path="/detail/:detailId" element={<Detail />} />
       </Routes>
     </div>
+    
   );
 }
 

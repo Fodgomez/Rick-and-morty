@@ -1,6 +1,5 @@
-/* eslint-disable no-unused-vars */
 import styles from './Card.module.css';
-import {Link} from "reac-route-dom";
+import {Link} from "react-router-dom";
 
 export default function Card(props) {
    return (
