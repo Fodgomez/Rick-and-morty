@@ -1,11 +1,11 @@
 import styles from "./Card.module.css";
 import { Link } from "react-router-dom";
-import { addFavorites, deleteFavorites } from "../../redux/actions";
+import { addFavorites, deleteFavorites } from "../Redux/actions";
 import { connect } from "react-redux";
 import { useEffect, useState } from "react";
 
 export function Card(props) {
-   //console.log(props);
+   
    const [isFav, setIsFav] = useState(false)
 
    useEffect(() => {
@@ -39,7 +39,9 @@ export function Card(props) {
             </div>
                <h2>{props.name}</h2>
             <Link to={`/detail/${props.detailId}`}>
-               <img className={styles.image} src={props.image} alt={props.name} />
+               <img className={styles.image} 
+               src={props.image} 
+               alt={props.name} />
             </Link>
                <div className={styles.data}>
                   <h4>{props.species}</h4>

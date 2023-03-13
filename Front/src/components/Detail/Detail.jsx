@@ -8,7 +8,7 @@ export default function Detail(props) {
     const [ character , setCharacter] = useState({});
     
     useEffect(() => {
-        fetch(`https://localhost:3001/rickandmorty/detail/${detailId}`)
+        fetch(`http://localhost:3001/rickandmorty/detail/${detailId}`)
         .then((response) => response.json())
         .then((char) => {
             if (char.name) {
@@ -23,7 +23,7 @@ export default function Detail(props) {
         return setCharacter({});
     }, [detailId]);
     
-    console.log(character);
+    //console.log(character);
 
     return (
         <div className={styles.container}>

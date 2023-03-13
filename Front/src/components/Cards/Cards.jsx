@@ -1,24 +1,25 @@
 import Card from '../Card/Card.jsx';
+import styles from './Cards.module.css';
 
 export default function Cards(props) {
    const { characters } = props;
    
    return (
       <div>
-      <div style={{display:"flex", justifyContent: "space-between"}}/>
-         {characters.map(character => (
-            <Card 
-               id={character.id}
-               key={character.id}
-               name={character.name}
-               species={character.species}
-               gender={character.gender}
-               image={character.image}
-               onClose={(() => characters.onClose(character.id))}
-            />
-         ))}
+         {
+            characters.map((elemento) => {
+         return <Card 
+         id={elemento.id}
+         key={elemento.id}
+         name={elemento.name} 
+         species={elemento.species} 
+         gender={elemento.gender} 
+         image={elemento.image} 
+         onClose={() => props.onClose(elemento.id)}/>
+      })
+         }
       </div>
    );
-   
 }
+
 

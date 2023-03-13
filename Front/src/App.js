@@ -12,7 +12,7 @@ function App() {
   const [characters, setCharacters] = useState([]);
 
   function onSearch(character) {
-    fetch(`https://localhost:3001/rickandmorty/onsearch/${character}`)
+    fetch(`http://localhost:3001/rickandmorty/onsearch/${character}`)
       .then((response) => response.json())
       .then((data) => {
         
@@ -20,9 +20,9 @@ function App() {
           setCharacters((oldChars) => [...oldChars, data]);
         } else {
           window.alert("No hay personajes con ese ID");
-        }
-      });
-  }
+      }
+    });
+  } 
 
   const onClose = (id) => {
     setCharacters(characters.filter((char) => char.id !== id));

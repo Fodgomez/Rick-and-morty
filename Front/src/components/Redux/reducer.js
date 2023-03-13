@@ -1,3 +1,4 @@
+
 import { ADD_FAVORITES, DELETE_FAVORITES, FILTER, ORDER } from "./types";
 
 const initialState = {
@@ -8,7 +9,6 @@ const initialState = {
 export default function rootReducer(state = initialState, { type, payload }) {
   switch (type) {
     case ADD_FAVORITES:
-      //console.log(state.myFavorites)
       return {
         ...state,
         myFavorites: [...state.myFavorites, payload],
@@ -29,6 +29,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
       };
     case ORDER: {
       const orderCopy = [...state.allCharacters];
+      
       const order = orderCopy.sort((a, b) => {
         if (a.id < b.id) {
           return payload === "Ascendente" ? 1 : -1;
@@ -38,14 +39,8 @@ export default function rootReducer(state = initialState, { type, payload }) {
         }
       });
     }
-    // const orderCopy = [...state.allCharacters]
-    // const order = orderCopy.sort()
-    // return {
-    //     ...state,
-    //     myFavorites: order
-    // }
-
-    default:
+  
+    default:  
       return state;
   }
 }

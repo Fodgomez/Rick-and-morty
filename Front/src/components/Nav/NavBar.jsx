@@ -1,20 +1,23 @@
 import React from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import styles from "./NavBar.module.css";
-import {NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 export default function NavBar(props){
     return(
         <div className={styles.container}>
-        <NavLink to="/about">
-            <button>About</button>
-        </NavLink>
-        <NavLink to="/favorites">
-          <button>Favorites</button>
-        </NavLink>
-        <NavLink to="/home">
+        <Link to="/home">
             <button>Home</button>
-        </NavLink>
+        </Link>
+
+        <Link to="/favorites">
+            <button>Favorites</button>
+        </Link>
+
+        <Link to="/about">
+            <button>About</button>
+        </Link>
+        
         <SearchBar onSearch={props.onSearch}/>
         </div>
     );

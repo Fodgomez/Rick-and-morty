@@ -1,57 +1,44 @@
-import { connect, useDispatch } from "react-redux"
-import Card from "../Card/Card"
-import { filterCards, orderCards } from "../../redux/actions";
+import { connect } from "react-redux";
+import { addFavorites, deleteFavorites } from "../Redux/actions";
+import { Card } from "../Card/Card";
+import styles from "./Favorites.module.css";
 
-export function Favorites({myFavorites}) {
-  //console.log(myFavorites)
-
-  const dispatch = useDispatch();
-  const handleClick = (e) => {
-    const { name, value } = e.target
-    switch (name) {
-      case "order":
-        return dispatch(orderCards(value))
-      case "filter":
-        return dispatch(filterCards(value))
-      default:
-        return myFavorites;
-    }
-  }
-
+export function Favorites(props) {
   return (
-    <div>
-      <div>
-        <select name="order" onClick={handleClick}>
-          <option value="Ascendente">Ascendente</option>
-          <option value="Descendente">Descendente</option>
-        </select>
-        <select name="filter" onClick={handleClick}>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-          <option value="Genderless">Genderless</option>
-          <option value="unknown">unknown</option>
-        </select>
-      </div>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        {myFavorites?.map((character, index) => (
+    <div className={styles.container}>
+      <h1>My Favorites</h1>
+      <div className={styles.gridContainer}>
+        {props.myFavorites.map((char) => (
           <Card
-            detailId={character.detailId} // <-----
-            key={index}
-            name={character.name}
-            species={character.species}
-            gender={character.gender}
-            image={character.image}
+            key={char.id}
+            name={char.name}
+            image={char.image}
+            species={char.species}
+            gender={char.gender}
+            detailId={char.id}
+            onClose={() => props.deleteFavorites(char.id)}
           />
         ))}
       </div>
     </div>
-  )
+  );
 }
 
-export function mapStateToProps(state) {
+function mapStateToProps(state) {
   return {
-    myFavorites: state.myFavorites
-  }
+    myFavorites: state.myFavorites,
+  };
 }
 
-export default connect(mapStateToProps, null)(Favorites)
+function mapDispatchToProps(dispatch) {
+  return {
+    addFavorites: function (char) {
+      dispatch(addFavorites(char));
+    },
+    deleteFavorites: function (id) {
+      dispatch(deleteFavorites(id));
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Favorites);
