@@ -4,6 +4,7 @@ import { ADD_FAVORITES, DELETE_FAVORITES, FILTER, ORDER } from "./types";
 const initialState = {
   myFavorites: [],
   allCharacters: [],
+  errors: {},
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -11,15 +12,26 @@ export default function rootReducer(state = initialState, { type, payload }) {
     case ADD_FAVORITES:
       return {
         ...state,
-        myFavorites: [...state.myFavorites, payload],
-        allCharacters: [...state.allCharacters, payload],
+        myFavorites: payload,
+        allCharacters: payload,
+        errors:{}
       };
+
     case DELETE_FAVORITES:
-      const filtered = state.myFavorites.filter((fav) => fav.id !== payload);
+      //const filtered= state.myFavorites.filter((fav) => fav.id !== payload);
       return {
         ...state,
-        myFavorites: filtered,
+        myFavorites: payload,
+        errors:{}
       };
+
+      case "GETFAVORITE":
+      return {
+        ...state,
+        myFavorites: payload,
+        errors:{},
+      };
+
     case FILTER:
       const filterCopy = [...state.allCharacters];
       const filter = filterCopy.filter((ch) => ch.gender === payload);
@@ -27,9 +39,9 @@ export default function rootReducer(state = initialState, { type, payload }) {
         ...state,
         myFavorites: filter,
       };
+
     case ORDER: {
       const orderCopy = [...state.allCharacters];
-      
       const order = orderCopy.sort((a, b) => {
         if (a.id < b.id) {
           return payload === "Ascendente" ? 1 : -1;
@@ -38,6 +50,13 @@ export default function rootReducer(state = initialState, { type, payload }) {
           return payload === "Ascendente" ? -1 : 1;
         }
       });
+    }
+
+    case"ERROR": {
+      return {
+        ...state,
+        errorrs: payload,
+      }
     }
   
     default:  
